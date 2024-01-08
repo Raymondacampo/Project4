@@ -1,5 +1,24 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    TODO
+    <div id="np">
+        <h2>New Post</h2>
+        <form action="{% url 'newpost' %}" method="post">
+        {% csrf_token %}
+            <div id="npform">{{form.content}}</div>
+            <div><input type="submit"></div>
+        </form>
+    </div>
+    <div id="ap">
+        {% for p in posts %}
+            <div class="post">
+                <div><h3>{{p.creator}}</h3></div>
+                <div>{{p.content}}</div>
+                <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" height="15px">
+                    {{p.likes.count}} <span class="date">{{p.created}}</span></div>
+            </div>
+            
+        {% endfor %}
+    </div>
+    <hr>
 {% endblock %}

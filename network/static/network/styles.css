@@ -1,0 +1,26 @@
+#np{
+    margin: 20px;
+}
+
+#np > input{
+    margin-left: 10px;
+}
+
+#npform > textarea{
+    border-radius: 5px;
+    resize: none;
+}
+
+.post{
+    margin: 20px;
+    padding: 5px;
+    border: black 1px;
+    border-style: outset;
+    border-radius: 5px;
+}
+
+.date{
+    color: gray;
+    font-size: 12px;
+    margin-left: 10px;
+}
