@@ -19,8 +19,20 @@
     border-radius: 5px;
 }
 
+.creator{
+    color: black;
+}
+
+.creator:hover{
+    color: rgb(61, 61, 61);
+}
+
 .date{
     color: gray;
     font-size: 12px;
     margin-left: 10px;
 }
+
+/* #fol{
+    float: left;
+} */
