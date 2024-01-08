@@ -14,15 +14,10 @@ class Post(models.Model):
     content = models.CharField(max_length=150)
     created = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, blank=True, related_name="liked_post")
+
+    def __str__(self):
+        return f"soy{self.creator}"
     
-    # def serialize(self):
-    #     return {
-    #         "id":self.id,
-    #         "creator":self.creator,
-    #         "content":self.content,
-    #         "created": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
-    #         "likes": self.likes
-    #     }
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="info")
     following = models.ManyToManyField(User, blank=True, related_name="following")

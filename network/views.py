@@ -65,6 +65,15 @@ def follow(request, user_id):
             "followers": followers,
             "following": following
         })
+    
+def following(request):
+    info = UserInfo.objects.get(user=request.user)
+    creators =info.serialize()['following'] 
+    posts = Post.objects.all
+    return render(request, "network/following.html", {
+        "posts":posts,
+        "creators":creators
+    })
 
 def login_view(request):
     if request.method == "POST":
