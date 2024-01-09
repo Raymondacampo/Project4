@@ -6,6 +6,7 @@ from django.urls import reverse
 from django import forms
 from .models import User, Post, UserInfo
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 class newpostForm(forms.Form):
     content = forms.CharField(widget=forms.Textarea(attrs={'rows':3, 'cols':40, 'placeholder':'Content...'}), min_length=10)
@@ -13,9 +14,17 @@ class newpostForm(forms.Form):
 def index(request):
     posts = Post.objects.all()
     posts = posts.order_by("-created").all()
+    x = 1
+
+    if request.method == 'POST':
+        x += int(request.GET.get("num"))
+
+    p = Paginator(posts, x)
+    page1 = p.page(2)
     return render(request, "network/index.html", {
         "form": newpostForm,
-        "posts":posts
+        "posts":posts,
+        "p":page1.object_list
     })
 
 def newpost(request):

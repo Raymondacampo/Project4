@@ -1,5 +1,5 @@
 {% extends "network/layout.html" %}
-
+{% load static %}
 {% block body %}
     <div id="np">
         <h2>New Post</h2>
@@ -10,7 +10,7 @@
         </form>
     </div>
     <div id="ap">
-        {% for p in posts %}
+        {% for p in p %}
             <div class="post">
                 <div><h4><a href="{% url 'profile' p.creator.id %}" class="creator">{{p.creator}}</a></h4></div>
                 <div>{{p.content}}</div>
@@ -21,4 +21,13 @@
         {% endfor %}
     </div>
     <hr>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" id="prev">Previous</a></li>
+          <li class="page-item"><a class="page-link" id="next">Next</a></li>
+        </ul>
+      </nav>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
 {% endblock %}
