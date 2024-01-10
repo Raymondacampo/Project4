@@ -33,6 +33,6 @@
     margin-left: 10px;
 }
 
-/* #fol{
-    float: left;
-} */
+.pagination{
+    justify-content: center;
+}

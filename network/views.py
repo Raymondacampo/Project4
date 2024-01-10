@@ -14,17 +14,13 @@ class newpostForm(forms.Form):
 def index(request):
     posts = Post.objects.all()
     posts = posts.order_by("-created").all()
-    x = 1
-
-    if request.method == 'POST':
-        x += int(request.GET.get("num"))
-
-    p = Paginator(posts, x)
-    page1 = p.page(2)
+    p = Paginator(posts, 10)
+    x = request.GET.get("page")
+    post = p.get_page(x)
     return render(request, "network/index.html", {
         "form": newpostForm,
-        "posts":posts,
-        "p":page1.object_list
+        "posts":post,
+        "x":1
     })
 
 def newpost(request):
