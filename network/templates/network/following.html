@@ -1,0 +1,19 @@
+{% extends 'network/layout.html' %}
+{% load static %}
+{% block body %}
+    <div id="ap">
+        {% for p in posts %}
+            {% if p.creator in creators %}
+                <div class="post">
+                    <div><h4><a href="{% url 'profile' p.creator.id %}" class="creator">{{p.creator}}</a></h4></div>
+                    <div>{{p.content}}</div>
+                    <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" height="15px">
+                        {{p.likes.count}} <span class="date">{{p.created}}</span></div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+<!-- {% block script %}
+    <script src="{% static 'network/following.js' %}"></script>
+{% endblock %} -->
