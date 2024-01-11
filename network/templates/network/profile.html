@@ -1,15 +1,14 @@
 {% extends 'network/layout.html' %}
 {% load static %}
 {% block body %} 
-    <input type="hidden" id="id" value="{{view.user.id}}">
     <div id="np">
         <div>
             <h1 id="name">{{view.user}}</h1>
             {% if user != view.user and user.is_authenticated %}
                 {% if user in view.followers.all %}
-                    <button onclick="follow()" id="foll">Unfollow</button>
+                    <button onclick="follow('{{view.user.id}}')" id="foll">Unfollow</button>
                 {% else %}
-                    <button onclick="follow()" id="foll">Follow</button>
+                    <button onclick="follow('{{view.user.id}}')" id="foll">Follow</button>
                 {% endif %}
             {% endif %}
         </div>
@@ -23,8 +22,8 @@
         {% for p in posts %}
             <div class="post">
                 <div id="content{{p.id}}">{{p.content}}</div>
-                <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" height="15px">
-                    {{p.likes.count}} <span class="date">{{p.created}}</span>
+                <div><img onclick="like('{{p.id}}')" class="like" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" height="15px">
+                    <span id="likes{{p.id}}">{{p.likes.count}}</span> <span class="date">{{p.created}}</span>
                     {% if p.creator == user %}
                     <button type="button" id="{{p.id}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_post{{p.id}}">
                         Edit

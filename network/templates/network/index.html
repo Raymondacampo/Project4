@@ -16,8 +16,8 @@
             <div id="" class="post">
                 <div><h4><a href="{% url 'profile' p.creator.id %}" class="creator">{{p.creator}}</a></h4></div>
                 <div id="content{{p.id}}">{{p.content}}</div>
-                <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" height="15px">
-                    {{p.likes.count}} <span class="date">{{p.created}}</span>
+                <div><img onclick="like('{{p.id}}')" class="like" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" height="15px">
+                    <span id="likes">{{p.likes.count}}</span> <span class="date">{{p.created}}</span>
 
                     {% if p.creator == user %}
                     <button type="button" id="{{p.id}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit_post{{p.id}}">

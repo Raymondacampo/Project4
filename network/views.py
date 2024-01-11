@@ -91,6 +91,17 @@ def following(request):
         "creators":creators
     })
 
+def like(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if request.user not in post.serialize()["likes"]:
+        post.likes.add(request.user)
+        post.save()
+        return JsonResponse(f"{len(post.serialize()['likes'])}", safe=False)
+    else:
+        post.likes.remove(request.user)
+        post.save()
+        return JsonResponse(f"{len(post.serialize()['likes'])}", safe=False)
+
 def login_view(request):
     if request.method == "POST":
 

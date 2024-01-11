@@ -18,6 +18,14 @@ class Post(models.Model):
     def __str__(self):
         return f"soy{self.creator}"
     
+    def serialize(self):
+        return {
+            "id":self.id,
+            "creator":self.creator,
+            "created": self.created.strftime("%b %d %Y, %I:%M %p"),
+            "likes": [user for user in self.likes.all()]
+        }
+    
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="info")
     following = models.ManyToManyField(User, blank=True, related_name="following")

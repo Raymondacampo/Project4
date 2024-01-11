@@ -31,9 +31,8 @@ function submit(id){
     
 }
 
-function follow(){
-    const user_id = document.querySelector('#id').value
-    fetch(`/follow/${user_id}`).then(response => response.json()).then(cond => {
+function follow(id){
+    fetch(`/follow/${id}`).then(response => response.json()).then(cond => {
        console.log(cond)
        document.querySelector('#foll').innerHTML = cond.state
        document.querySelector('#followers').innerHTML = cond.followers
@@ -41,3 +40,17 @@ function follow(){
 });
     
     }
+
+function like(id){
+    const csrftoken = getCookie('csrftoken');
+    fetch(`like/${id}`, 
+    {
+        headers : {
+            "X-CSRFToken": csrftoken
+        },
+        method :'POST'
+    }).then(response => response.json()).then(data => {
+        console.log(data)
+        document.querySelector(`#likes${id}`).innerHTML = data;
+    })
+}
