@@ -36,3 +36,8 @@
 .pagination{
     justify-content: center;
 }
+
+.edit{
+    border-radius: 5px;
+    resize: none;
+}

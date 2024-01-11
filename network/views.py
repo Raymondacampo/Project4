@@ -7,7 +7,7 @@ from django import forms
 from .models import User, Post, UserInfo
 from django.http import JsonResponse
 from django.core.paginator import Paginator
-
+import json
 class newpostForm(forms.Form):
     content = forms.CharField(widget=forms.Textarea(attrs={'rows':3, 'cols':40, 'placeholder':'Content...'}), min_length=10)
 
@@ -30,9 +30,20 @@ def newpost(request):
         if len(content) > 0:
             post = Post.objects.create(creator = creator, content=content)
             post.save()
-            return HttpResponseRedirect(reverse(index))
-        else:
-            return HttpResponse('hola')
+        return HttpResponseRedirect(reverse("index"))
+
+        
+def edit(request, post_id):
+    if request.method == 'POST':
+        post = Post.objects.get(pk=post_id)
+        data = json.loads(request.body)
+        body = data.get("body", "")
+        post.content = body 
+        post.save()
+        return JsonResponse(f"{post.content}", safe=False)
+        # return HttpResponseRedirect(reverse('index'))
+    else:
+        return JsonResponse('hola', safe=False)
 
 def profile(request, user_id):
     info = UserInfo.objects.get(pk=int(user_id))
